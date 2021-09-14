@@ -5,6 +5,8 @@ module MyLib (someFunc) where
 import Text.HTML.Scalpel
 import Control.Applicative
 
+-- TODO should use Twilio for SMS alerting (trial?)
+
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
 
