@@ -70,7 +70,7 @@ library
     -- Base language which the package is written in.
     default-language: Haskell2010
 
-executable game-ps5-form-detector
+executable game-ps5-availability-detector
     -- .hs or .lhs file containing the Main module.
     main-is:          Main.hs
 
@@ -83,7 +83,7 @@ executable game-ps5-form-detector
     -- Other library packages from which modules are imported.
     build-depends:
         base >=4.14.3.0,
-        game-ps5-form-detector
+        game-ps5-availability-detector
 
     -- Directories containing source files.
     hs-source-dirs:   app
@@ -91,7 +91,7 @@ executable game-ps5-form-detector
     -- Base language which the package is written in.
     default-language: Haskell2010
 
-test-suite game-ps5-form-detector-test
+test-suite game-ps5-availability-detector-test
     -- Base language which the package is written in.
     default-language: Haskell2010
 
