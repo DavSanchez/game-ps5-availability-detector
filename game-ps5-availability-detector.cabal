@@ -5,7 +5,7 @@ cabal-version:      3.0
 --   http://haskell.org/cabal/users-guide/
 -- 
 -- The name of the package.
-name:               game-ps5-form-detector
+name:               game-ps5-availability-detector
 
 -- The package version.
 -- See the Haskell package versioning policy (PVP) for standards
