@@ -60,9 +60,12 @@ library
     build-depends:    base >=4.14.3.0
                     , aeson
                     , http-conduit
+                    , http-types
                     , dotenv
                     , bytestring
                     , mtl
+                    , text
+                    , co-log
 
     -- Directories containing source files.
     hs-source-dirs:   src
@@ -83,7 +86,8 @@ executable game-ps5-availability-detector
     -- Other library packages from which modules are imported.
     build-depends:
         base >=4.14.3.0,
-        game-ps5-availability-detector
+        game-ps5-availability-detector,
+        co-log
 
     -- Directories containing source files.
     hs-source-dirs:   app
@@ -102,7 +106,7 @@ test-suite game-ps5-availability-detector-test
     hs-source-dirs:   test
 
     -- The entrypoint to the test suite.
-    main-is:          MyLibTest.hs
+    main-is:          PS5Test.hs
 
     -- Test dependencies.
     build-depends:    base >=4.14.3.0
