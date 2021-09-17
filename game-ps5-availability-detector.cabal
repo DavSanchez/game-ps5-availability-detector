@@ -87,7 +87,8 @@ executable game-ps5-availability-detector
     build-depends:
         base >=4.14.3.0,
         game-ps5-availability-detector,
-        co-log
+        co-log,
+        text
 
     -- Directories containing source files.
     hs-source-dirs:   app
