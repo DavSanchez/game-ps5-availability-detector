@@ -18,6 +18,7 @@ import Network.HTTP.Simple (Response, getResponseBody, getResponseStatus, httpJS
 import Network.HTTP.Types.Status (Status (statusCode, statusMessage), status200)
 import System.IO.Error (catchIOError)
 import Twilio (getTwilioConfig, sendSMSReq)
+import System.Exit (exitSuccess)
 
 availabilityMessage :: ByteString
 availabilityMessage = "\nBRO.\nLA PS5 ESTÁ DISPONIBLE EN https://www.game.es/ps5-playstation5-reserva.\n\nCORRE!"
@@ -43,6 +44,8 @@ availability g =
         logInfo "[Twilio] Sending SMS"
         twilioResponse <- httpJSON $ sendSMSReq twilioConf availabilityMessage
         logWarning $ "[Twilio] SMS send response: " <> (pack . show) (getResponseBody twilioResponse :: Value)
+        logWarning "[Twilio] Don't want to exhaust Twilio balance. Exiting..."
+        liftIO exitSuccess
       else logInfo "[GAME.es] No luck. PS5 is not available. Retrying in 60 seconds." >> pure ()
   where
     a = isPS5Available g
