@@ -9,16 +9,12 @@ import Data.Aeson (Value)
 import Data.ByteString (ByteString)
 import Data.Text (pack)
 import GHC.Conc.IO (threadDelay)
-import Game
-  ( Ps5Availability,
-    isPS5Available,
-    ps5AvailabilityRequest,
-  )
+import Game (Ps5Availability, isPS5Available, ps5AvailabilityRequest)
 import Network.HTTP.Simple (Response, getResponseBody, getResponseStatus, httpJSON)
 import Network.HTTP.Types.Status (Status (statusCode, statusMessage), status200)
+import System.Exit (exitSuccess)
 import System.IO.Error (catchIOError)
 import Twilio (getTwilioConfig, sendSMSReq)
-import System.Exit (exitSuccess)
 
 availabilityMessage :: ByteString
 availabilityMessage = "\nBRO.\nLA PS5 ESTÁ DISPONIBLE EN https://www.game.es/ps5-playstation5-reserva.\n\nCORRE!"
