@@ -2,8 +2,6 @@
 
 module Twilio where
 
-import Configuration.Dotenv (defaultConfig, loadFile)
-import Control.Monad (void)
 -- import Control.Monad.Reader
 import Data.ByteString (ByteString)
 import Data.String (IsString (fromString))
@@ -19,7 +17,6 @@ data TwilioConfig = TwilioConfig
 
 getTwilioConfig :: IO TwilioConfig
 getTwilioConfig = do
-  void $ loadFile defaultConfig
   to <- getEnv "SMS_TO"
   from <- getEnv "SMS_FROM"
   ssid <- getEnv "TWILIO_ACCOUNT_SID"
