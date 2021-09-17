@@ -13,7 +13,7 @@ main = forever ps5
 ps5 :: IO ()
 ps5 = withLogTextFile "game-ps5-availability-detector--logs.log" $ \logTextFile -> do
   let loggingAction :: LogAction IO Text
-      loggingAction = logTextStdout <> logTextStderr <> logTextFile
+      loggingAction = logTextStdout <> logTextFile -- <> logTextStderr
   let richMessageAction :: LogAction IO (RichMessage IO)
       richMessageAction = cmapM fmtRichMessageDefault loggingAction
   let fullMessageAction :: LogAction IO Message
