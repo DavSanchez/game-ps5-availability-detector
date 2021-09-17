@@ -14,7 +14,7 @@ name:               game-ps5-availability-detector
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:            0.1.0.0
+version:            0.2.0.0
 
 -- A short (one-line) description of the package.
 synopsis:
@@ -84,11 +84,10 @@ executable game-ps5-availability-detector
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:
-        base >=4.14.3.0,
-        game-ps5-availability-detector,
-        co-log,
-        text
+    build-depends:    base >=4.14.3.0
+                    , co-log
+                    , text
+                    , game-ps5-availability-detector
 
     -- Directories containing source files.
     hs-source-dirs:   app
