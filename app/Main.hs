@@ -1,8 +1,12 @@
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE TypeApplications #-}
+
 module Main where
 
 import Colog
   ( LogAction,
     Message,
+    MessageField (MessageField),
     RichMessage,
     cmapM,
     defaultFieldMap,
@@ -17,6 +21,7 @@ import Colog
 import Configuration.Dotenv (defaultConfig, loadFile)
 import Control.Monad (forever, void)
 import Data.Text (Text)
+import Data.TypeRepMap (TypeRepMap, delete)
 import PS5 (ps5check)
 import System.Environment (getEnv)
 
@@ -36,7 +41,9 @@ ps5 = do
     let richMessageAction :: LogAction IO (RichMessage IO)
         richMessageAction = cmapM fmtRichMessageDefault loggingAction
 
-    let fullMessageAction :: LogAction IO Message
-        fullMessageAction = upgradeMessageAction defaultFieldMap richMessageAction
+    let logFieldMap :: TypeRepMap (MessageField IO)
+        logFieldMap = (delete @"threadId") defaultFieldMap -- Remove thread ID field (not used)
+    let messageAction :: LogAction IO Message
+        messageAction = upgradeMessageAction logFieldMap richMessageAction
 
-    usingLoggerT fullMessageAction ps5check
+    usingLoggerT messageAction ps5check
