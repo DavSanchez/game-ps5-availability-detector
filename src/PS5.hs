@@ -17,7 +17,7 @@ import System.IO.Error (catchIOError)
 import Twilio (getTwilioConfig, sendSMSReq)
 
 availabilityMessage :: ByteString
-availabilityMessage = "\nBRO.\nLA PS5 ESTÁ DISPONIBLE EN https://www.game.es/ps5-playstation5-reserva.\n\nCORRE!"
+availabilityMessage = "RESERVAS DE LA PS5 ABIERTAS EN https://www.game.es/ps5-playstation5-reserva.\n\n¡CORRE!"
 
 ps5check :: (WithLog env Message m, MonadIO m) => m ()
 ps5check = do
