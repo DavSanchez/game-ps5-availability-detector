@@ -22,5 +22,5 @@ data Ps5Availability = Ps5Availability
 ps5AvailabilityRequest :: Request
 ps5AvailabilityRequest = "POST https://www.game.es/checkavailability/ps5playstation5reserva"
 
-isPS5Available :: Response Ps5Availability -> Bool
-isPS5Available = available . getResponseBody
+isPS5Available :: Ps5Availability -> Bool
+isPS5Available = available

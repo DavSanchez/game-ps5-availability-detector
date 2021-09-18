@@ -24,12 +24,12 @@ ps5check = do
   gameRes <- httpJSONEither ps5AvailabilityRequest
   let status = getResponseStatus gameRes
   if status == status200
-    then logInfo "[GAME.es] HTTP Response: 200 OK" >> either responseParseError availability gameRes
+    then logInfo "[GAME.es] HTTP Response: 200 OK" >> either responseParseError availability (getResponseBody gameRes)
     else logError $ "[GAME.es] HTTP Response: " <> (pack . show) (statusCode status) <> " " <> (pack . show) (statusMessage status)
   liftIO $ threadDelay 60000000 -- 1 per minute
   liftIO $ pure ()
 
-availability :: (WithLog env Message m, MonadIO m) => Response Ps5Availability -> m ()
+availability :: (WithLog env Message m, MonadIO m) => Ps5Availability -> m ()
 availability g =
   logInfo ("[GAME.es] Available: " <> (pack . show) a)
     >> if a
@@ -46,5 +46,5 @@ availability g =
   where
     a = isPS5Available g
 
-responseParseError :: (WithLog env Message m, MonadIO m) => Response JSONException  -> m ()
+responseParseError :: (WithLog env Message m, MonadIO m) => JSONException  -> m ()
 responseParseError e = logError $ "[GAME.es] JSON Parse Error: " <> (pack . show) e
