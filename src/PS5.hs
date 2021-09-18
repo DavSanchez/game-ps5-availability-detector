@@ -27,7 +27,6 @@ ps5check = do
     then logInfo "[GAME.es] HTTP Response: 200 OK" >> either responseParseError availability (getResponseBody gameRes)
     else logError $ "[GAME.es] HTTP Response: " <> (pack . show) (statusCode status) <> " " <> (pack . show) (statusMessage status)
   liftIO $ threadDelay 60000000 -- 1 per minute
-  liftIO $ pure ()
 
 availability :: (WithLog env Message m, MonadIO m) => Ps5Availability -> m ()
 availability g =
