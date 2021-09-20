@@ -26,10 +26,10 @@ ps5check interval = do
     Left e -> logError ("[GAME.es] Error in request: " <> textify (e :: HttpException))
     Right res -> do
       let status = getResponseStatus res
-          codeAndMessage = T.unwords [textify $ statusCode status, textify $ statusMessage status]
+          codeAndMessage = "[GAME.es] HTTP Response: " <> T.unwords [textify $ statusCode status, textify $ statusMessage status]
       if status == status200
-        then logInfo ("[GAME.es] HTTP Response: " <> codeAndMessage) >> either responseParseError availability (getResponseBody res)
-        else logError $ "[GAME.es] HTTP Response: " <> codeAndMessage
+        then logInfo codeAndMessage >> either responseParseError availability (getResponseBody res)
+        else logError codeAndMessage
   liftIO $ threadDelay interval
 
 availability :: (WithLog env Message m, MonadIO m) => Ps5Availability -> m ()
