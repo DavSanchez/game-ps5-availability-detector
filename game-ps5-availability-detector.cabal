@@ -85,6 +85,7 @@ executable game-ps5-availability-detector
     -- Other library packages from which modules are imported.
     build-depends:    base >=4.14.3.0
                     , dotenv
+                    , directory
                     , co-log
                     , text
                     , typerep-map
