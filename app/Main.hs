@@ -34,6 +34,7 @@ ps5 :: IO ()
 ps5 = do
   void $ loadFile defaultConfig
   logFilePath <- getEnv "LOG_FILE_PATH"
+  checkIntervalMicroseconds <- getEnv "CHECK_INTERVAL_MICROSECONDS"
   withLogTextFile logFilePath $ \logTextFile -> do
     let loggingAction :: LogAction IO Text
         loggingAction = logTextStdout <> logTextFile
@@ -46,4 +47,4 @@ ps5 = do
     let messageAction :: LogAction IO Message
         messageAction = upgradeMessageAction logFieldMap richMessageAction
 
-    usingLoggerT messageAction ps5check
+    usingLoggerT messageAction (ps5check (read checkIntervalMicroseconds :: Int))
